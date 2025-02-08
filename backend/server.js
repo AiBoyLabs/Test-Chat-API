@@ -4,7 +4,14 @@ const { OpenAI } = require('openai');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+
+// Update CORS configuration to allow your domain
+app.use(cors({
+    origin: ['https://hotcrypto.shop', 'http://hotcrypto.shop'],
+    methods: ['POST', 'GET'],
+    credentials: true
+}));
+
 app.use(express.json());
 
 const openai = new OpenAI({
