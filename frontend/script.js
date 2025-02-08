@@ -10,7 +10,7 @@ async function sendMessage() {
     userInput.value = '';
 
     try {
-        const response = await fetch('https://your-backend-url.render.com/chat', {
+        const response = await fetch('https://test-chat-api.onrender.com/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
