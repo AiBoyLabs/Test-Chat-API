@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const providersSection = document.querySelector('.providers-section');
     const chatContainer = document.querySelector('.chat-container');
     
-    // Replace with actual Render.com URL
     const API_URL = 'https://test-chat-api.onrender.com';
 
+    // Message handling functions
     function addMessage(message, isUser = false) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
@@ -62,27 +62,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Chat input handling
     sendButton.addEventListener('click', async () => {
         const message = chatInput.value.trim();
         if (message) {
             addMessage(message, true);
             chatInput.value = '';
-            
-            // Show loading state
             sendButton.disabled = true;
-            
-            // Get response from backend
             const reply = await sendMessage(message);
             addMessage(reply);
-            
-            // Reset button state
             sendButton.disabled = false;
         }
     });
 
+    // Enter key handling
     chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             sendButton.click();
         }
     });
-}); 
+});
