@@ -1,8 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
-
-dotenv.config();
+const { OpenAI } = require('openai');
+require('dotenv').config();
 
 const app = express();
 
@@ -10,18 +9,22 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Initialize OpenAI
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+});
+
 // Routes
 app.post('/chat', async (req, res) => {
     try {
         const { message } = req.body;
         
-        // Here you would typically integrate with your AI service
-        // For now, we'll send a simple response
-        const response = {
-            reply: "I am processing your request..."
-        };
-        
-        res.json(response);
+        const completion = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: message }],
+        });
+
+        res.json({ reply: completion.choices[0].message.content });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'Internal server error' });
