@@ -9,28 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Replace with actual Render.com URL
     const API_URL = 'https://test-chat-api.onrender.com';
 
-    // Navigation handling
-    document.querySelector('a[href="#about"]').addEventListener('click', (e) => {
-        e.preventDefault();
-        aboutSection.style.display = 'block';
-        chatContainer.style.display = 'none';
-        providersSection.style.display = 'none';
-    });
-
-    document.querySelector('a[href="#providers"]').addEventListener('click', (e) => {
-        e.preventDefault();
-        providersSection.style.display = 'block';
-        chatContainer.style.display = 'none';
-        aboutSection.style.display = 'none';
-    });
-
-    document.querySelectorAll('.back-button').forEach(button => {
-        button.addEventListener('click', () => {
-            aboutSection.style.display = 'none';
-            providersSection.style.display = 'none';
-            chatContainer.style.display = 'block';
-        });
-    });
+    function addMessage(message, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+        messageDiv.textContent = message;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
 
     async function sendMessage(message) {
         try {
@@ -54,13 +39,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function addMessage(message, isUser = false) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
-        messageDiv.textContent = message;
-        chatMessages.appendChild(messageDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
+    // Navigation handling
+    document.querySelector('a[href="#about"]').addEventListener('click', (e) => {
+        e.preventDefault();
+        aboutSection.style.display = 'block';
+        chatContainer.style.display = 'none';
+        providersSection.style.display = 'none';
+    });
+
+    document.querySelector('a[href="#providers"]').addEventListener('click', (e) => {
+        e.preventDefault();
+        providersSection.style.display = 'block';
+        chatContainer.style.display = 'none';
+        aboutSection.style.display = 'none';
+    });
+
+    document.querySelectorAll('.back-button').forEach(button => {
+        button.addEventListener('click', () => {
+            aboutSection.style.display = 'none';
+            providersSection.style.display = 'none';
+            chatContainer.style.display = 'block';
+        });
+    });
 
     sendButton.addEventListener('click', async () => {
         const message = chatInput.value.trim();
