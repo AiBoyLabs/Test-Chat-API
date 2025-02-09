@@ -1,68 +1,392 @@
+:root {
+    --primary-color: #00F0FF;
+    --background-color: #000;
+    --text-color: #fff;
+    --gradient: linear-gradient(to right, #00F0FF, #FF00FF);
+}
+
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-logo {
+    height: 40px;
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.nav-links a:hover {
+    background: rgba(0, 240, 255, 0.1);
+}
+
+.connect-wallet {
+    background: linear-gradient(90deg, #FF00FF, #00F0FF);
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    color: var(--text-color);
+    cursor: pointer;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+}
+
+.connect-wallet:hover {
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+    transform: translateY(-1px);
 }
 
 .chat-container {
-    width: 80%;
-    max-width: 600px;
-    background: white;
+    max-width: 1000px;
+    margin: 2rem auto;
+    background-color: rgba(0, 0, 0, 0.9);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    overflow: hidden;
+    padding: 1.5rem;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
-.chat-box {
+.chat-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-messages {
+    padding: 1rem;
     height: 400px;
-    padding: 20px;
     overflow-y: auto;
 }
 
 .message {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 4px;
 }
 
-.user-message {
-    background-color: #007bff;
-    color: white;
-    margin-left: 20%;
+.message.bot {
+    background-color: rgba(128, 0, 128, 0.3);
 }
 
-.bot-message {
-    background-color: #e9ecef;
-    margin-right: 20%;
+.message.user {
+    background-color: rgba(0, 240, 255, 0.1);
 }
 
-.input-area {
+.chat-input {
     display: flex;
-    padding: 20px;
-    border-top: 1px solid #ddd;
+    gap: 1rem;
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-input {
+.chat-input input {
     flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-right: 10px;
+    padding: 0.8rem 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: var(--text-color);
+    font-size: 1rem;
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+.chat-input input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.send-button {
+    background: linear-gradient(90deg, #00F0FF, #FF00FF);
     border: none;
-    border-radius: 5px;
+    padding: 0.5rem 2rem;
+    border-radius: 4px;
+    color: var(--text-color);
     cursor: pointer;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
 }
 
-button:hover {
-    background-color: #0056b3;
+.send-button:hover {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+    transform: translateY(-1px);
+}
+
+.providers-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.back-button {
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.back-button:hover {
+    background: rgba(0, 240, 255, 0.2);
+}
+
+.providers-title {
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.providers-section {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    display: none; /* Hidden by default */
+}
+
+.providers-section.active {
+    display: block;
+}
+
+.providers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.provider-card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+.provider-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.provider-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.provider-name {
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.provider-description {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.provider-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+}
+
+.tag.research { background: rgba(255, 0, 255, 0.2); }
+.tag.ai-core { background: rgba(0, 240, 255, 0.2); }
+.tag.blockchain { background: rgba(128, 0, 255, 0.2); }
+.tag.ecosystem { background: rgba(0, 255, 128, 0.2); }
+.tag.api { background: rgba(255, 165, 0, 0.2); }
+.tag.framework { background: rgba(0, 255, 0, 0.2); }
+.tag.development { background: rgba(255, 0, 0, 0.2); }
+.tag.open-source { background: rgba(128, 128, 128, 0.2); }
+.tag.ai-provider { background: rgba(0, 255, 255, 0.2); }
+
+.visit-provider {
+    display: inline-block;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: opacity 0.3s ease;
+}
+
+.visit-provider:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 1200px) {
+    .providers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .providers-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (max-width: 768px) {
+    .nav-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+.about-section {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    display: none; /* Hidden by default */
+}
+
+.about-section.active {
+    display: block;
+}
+
+.about-card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.social-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.social-link .icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.social-title {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.social-handle {
+    color: var(--text-color);
+    font-size: 0.8rem;
+}
+
+.lightning {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.aiboy-title {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.email-link {
+    display: none; /* Hide email link */
 } 
