@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const providersSection = document.querySelector('.providers-section');
     const chatContainer = document.querySelector('.chat-container');
     
-    // Replace this with your actual Render.com URL
-    const API_URL = 'https://your-actual-render-url.onrender.com';
+    // Replace with actual Render.com URL
+    const API_URL = 'https://test-chat-api.onrender.com';
 
     // Navigation handling
     document.querySelector('a[href="#about"]').addEventListener('click', (e) => {
