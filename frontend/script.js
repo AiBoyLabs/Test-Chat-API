@@ -1,43 +1,57 @@
-async function sendMessage() {
-    const userInput = document.getElementById('userInput');
-    const chatBox = document.getElementById('chatBox');
-    const message = userInput.value.trim();
+document.addEventListener('DOMContentLoaded', () => {
+    const chatInput = document.querySelector('.chat-input input');
+    const sendButton = document.querySelector('.send-button');
+    const chatMessages = document.querySelector('.chat-messages');
+    const aboutSection = document.querySelector('.about-section');
+    const providersSection = document.querySelector('.providers-section');
+    const chatContainer = document.querySelector('.chat-container');
+    
+    // Navigation handling
+    document.querySelector('a[href="#about"]').addEventListener('click', (e) => {
+        e.preventDefault();
+        aboutSection.style.display = 'block';
+        chatContainer.style.display = 'none';
+        providersSection.style.display = 'none';
+    });
 
-    if (message === '') return;
+    document.querySelector('a[href="#providers"]').addEventListener('click', (e) => {
+        e.preventDefault();
+        providersSection.style.display = 'block';
+        chatContainer.style.display = 'none';
+        aboutSection.style.display = 'none';
+    });
 
-    // Add user message to chat
-    appendMessage('user', message);
-    userInput.value = '';
-
-    try {
-        const response = await fetch('https://test-chat-api.onrender.com/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ message }),
+    document.querySelectorAll('.back-button').forEach(button => {
+        button.addEventListener('click', () => {
+            aboutSection.style.display = 'none';
+            providersSection.style.display = 'none';
+            chatContainer.style.display = 'block';
         });
+    });
 
-        const data = await response.json();
-        appendMessage('bot', data.reply);
-    } catch (error) {
-        console.error('Error:', error);
-        appendMessage('bot', 'Sorry, something went wrong!');
+    function addMessage(message, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+        messageDiv.textContent = message;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
     }
-}
 
-function appendMessage(sender, message) {
-    const chatBox = document.getElementById('chatBox');
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${sender}-message`;
-    messageDiv.textContent = message;
-    chatBox.appendChild(messageDiv);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
+    sendButton.addEventListener('click', () => {
+        const message = chatInput.value.trim();
+        if (message) {
+            addMessage(message, true);
+            chatInput.value = '';
+            // Simulate bot response
+            setTimeout(() => {
+                addMessage('I am processing your request...');
+            }, 1000);
+        }
+    });
 
-// Allow sending message with Enter key
-document.getElementById('userInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        sendMessage();
-    }
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendButton.click();
+        }
+    });
 }); 
