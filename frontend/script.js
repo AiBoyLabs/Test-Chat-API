@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const providersSection = document.querySelector('.providers-section');
     const chatContainer = document.querySelector('.chat-container');
     
+    // API URL - change this based on environment
+    const API_URL = process.env.NODE_ENV === 'production' 
+        ? 'https://your-render-app.onrender.com'
+        : 'http://localhost:3000';
+
     // Navigation handling
     document.querySelector('a[href="#about"]').addEventListener('click', (e) => {
         e.preventDefault();
@@ -29,6 +34,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    async function sendMessage(message) {
+        try {
+            const response = await fetch(`${API_URL}/chat`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            return data.reply;
+        } catch (error) {
+            console.error('Error:', error);
+            return 'Sorry, there was an error processing your request.';
+        }
+    }
+
     function addMessage(message, isUser = false) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
@@ -37,15 +64,21 @@ document.addEventListener('DOMContentLoaded', () => {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    sendButton.addEventListener('click', () => {
+    sendButton.addEventListener('click', async () => {
         const message = chatInput.value.trim();
         if (message) {
             addMessage(message, true);
             chatInput.value = '';
-            // Simulate bot response
-            setTimeout(() => {
-                addMessage('I am processing your request...');
-            }, 1000);
+            
+            // Show loading state
+            sendButton.disabled = true;
+            
+            // Get response from backend
+            const reply = await sendMessage(message);
+            addMessage(reply);
+            
+            // Reset button state
+            sendButton.disabled = false;
         }
     });
 
