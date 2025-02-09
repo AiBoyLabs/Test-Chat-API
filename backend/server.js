@@ -1,39 +1,34 @@
 const express = require('express');
 const cors = require('cors');
-const { OpenAI } = require('openai');
-require('dotenv').config();
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 
-// Update CORS configuration to allow your domain
-app.use(cors({
-    origin: ['https://hotcrypto.shop', 'http://hotcrypto.shop'],
-    methods: ['POST', 'GET'],
-    credentials: true
-}));
-
+// Middleware
+app.use(cors());
 app.use(express.json());
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-});
-
+// Routes
 app.post('/chat', async (req, res) => {
     try {
         const { message } = req.body;
-        const completion = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: message }],
-        });
-
-        res.json({ reply: completion.choices[0].message.content });
+        
+        // Here you would typically integrate with your AI service
+        // For now, we'll send a simple response
+        const response = {
+            reply: "I am processing your request..."
+        };
+        
+        res.json(response);
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).json({ error: 'Something went wrong' });
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 }); 
