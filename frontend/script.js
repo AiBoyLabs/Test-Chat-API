@@ -6,10 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const providersSection = document.querySelector('.providers-section');
     const chatContainer = document.querySelector('.chat-container');
     
-    // API URL - change this based on environment
-    const API_URL = process.env.NODE_ENV === 'production' 
-        ? 'https://your-render-app.onrender.com'
-        : 'http://localhost:3000';
+    // Replace this with your actual Render.com URL
+    const API_URL = 'https://your-actual-render-url.onrender.com';
 
     // Navigation handling
     document.querySelector('a[href="#about"]').addEventListener('click', (e) => {
