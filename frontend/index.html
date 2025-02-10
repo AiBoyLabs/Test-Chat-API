@@ -179,6 +179,11 @@
             </div>
         </section>
     </main>
-    <script src="script.js?v=3"></script>
+    <script>
+        // This will force a fresh load of the script
+        const scriptElement = document.createElement('script');
+        scriptElement.src = `script.js?v=${new Date().getTime()}`;
+        document.body.appendChild(scriptElement);
+    </script>
 </body>
 </html> 
