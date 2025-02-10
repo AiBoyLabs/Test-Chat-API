@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendButton = document.querySelector('.send-button');
     const chatMessages = document.querySelector('.chat-messages');
     
-    const API_URL = 'https://test-chat-api.onrender.com:10000';
+    const API_URL = 'https://test-chat-api.onrender.com';
 
     function addMessage(message, isUser = false) {
         const messageDiv = document.createElement('div');
