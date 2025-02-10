@@ -5,8 +5,11 @@ require('dotenv').config();
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// Настройка CORS для всех источников
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST']
+}));
 app.use(express.json());
 
 // Initialize OpenAI
@@ -31,7 +34,7 @@ app.post('/chat', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
