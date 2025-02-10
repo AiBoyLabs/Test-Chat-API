@@ -1,8 +1,22 @@
 // Simple test script
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded');  // Проверка загрузки DOM
+
     const chatInput = document.querySelector('.chat-input input');
     const sendButton = document.querySelector('.send-button');
     const chatMessages = document.querySelector('.chat-messages');
+
+    // Проверяем что все элементы найдены
+    if (!chatInput || !sendButton || !chatMessages) {
+        console.error('Required elements not found:', {
+            chatInput: !!chatInput,
+            sendButton: !!sendButton,
+            chatMessages: !!chatMessages
+        });
+        return;
+    }
+
+    console.log('All elements found');  // Подтверждение что элементы найдены
     
     const API_URL = 'https://test-chat-api.onrender.com';
 
