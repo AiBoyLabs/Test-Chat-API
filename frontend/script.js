@@ -1,14 +1,11 @@
+// Simple test script
 document.addEventListener('DOMContentLoaded', () => {
     const chatInput = document.querySelector('.chat-input input');
     const sendButton = document.querySelector('.send-button');
     const chatMessages = document.querySelector('.chat-messages');
-    const aboutSection = document.querySelector('.about-section');
-    const providersSection = document.querySelector('.providers-section');
-    const chatContainer = document.querySelector('.chat-container');
     
     const API_URL = 'https://test-chat-api.onrender.com';
 
-    // Message handling functions
     function addMessage(message, isUser = false) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
@@ -38,29 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return 'Sorry, there was an error processing your request.';
         }
     }
-
-    // Navigation handling
-    document.querySelector('a[href="#about"]').addEventListener('click', (e) => {
-        e.preventDefault();
-        aboutSection.style.display = 'block';
-        chatContainer.style.display = 'none';
-        providersSection.style.display = 'none';
-    });
-
-    document.querySelector('a[href="#providers"]').addEventListener('click', (e) => {
-        e.preventDefault();
-        providersSection.style.display = 'block';
-        chatContainer.style.display = 'none';
-        aboutSection.style.display = 'none';
-    });
-
-    document.querySelectorAll('.back-button').forEach(button => {
-        button.addEventListener('click', () => {
-            aboutSection.style.display = 'none';
-            providersSection.style.display = 'none';
-            chatContainer.style.display = 'block';
-        });
-    });
 
     // Chat input handling
     sendButton.addEventListener('click', async () => {
