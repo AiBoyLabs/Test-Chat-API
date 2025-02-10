@@ -5,19 +5,16 @@ require('dotenv').config();
 
 const app = express();
 
-// Настройка CORS для всех источников
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST']
 }));
 app.use(express.json());
 
-// Initialize OpenAI
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
 
-// Routes
 app.post('/chat', async (req, res) => {
     try {
         const { message } = req.body;
@@ -34,7 +31,6 @@ app.post('/chat', async (req, res) => {
     }
 });
 
-// Позволяем Render.com определить порт
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
